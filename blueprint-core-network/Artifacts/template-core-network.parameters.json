@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "prefix": {
+      "value": "uks"
+    },
+    "hubVnetName": {
+      "value": "vnet-hub"
+    },
+    "hubAddressSpace": {
+      "value": "10.172.168.0/25"
+    },
+    "hubGatewaySubnetAddressPrefix": {
+      "value": "10.172.168.0/27"
+    },
+    "hubNetwatchSubnetName": {
+      "value": "hub-netwatch"
+    },
+    "hubNetwatchAddressPrefix": {
+      "value": "10.172.168.32/29"
+    },
+    "prodVnetName": {
+      "value": "vnet-prod"
+    },
+    "prodAddressSpace": {
+      "value": "10.172.169.0/24"
+    },
+    "prodNetwatchSubnetName": {
+      "value": "prod-netwatch"
+    },
+    "prodNetwatchAddressPrefix": {
+      "value": "10.172.169.0/29"
+    },
+    "location": {
+      "value": "[resourceGroup().location]"
+    }
+  }
+}

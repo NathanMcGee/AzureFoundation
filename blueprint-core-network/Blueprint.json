@@ -1,0 +1,54 @@
+{
+  "properties": {
+    "targetScope": "subscription",
+    "parameters": {
+      "bpprefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Prefix",
+          "description": "Prefix applied to all resources"
+        }
+      },
+      "bphubAddressSpace": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Hub Address Space",
+          "description": "Address space for the hub vnet"
+        },
+        "defaultValue": "10.172.168.0/25"
+      },
+      "bphubGatewaySubnetAddressPrefix":{
+        "type": "string",
+        "metadata": {
+          "displayName": "Hub GatewaySubnet Address Prefix",
+          "description": "Address prefix for the GatewaySubnet subnet in the Hub Vnet"
+        },
+        "defaultValue": "10.172.168.0/27"
+      },
+      "bpprodAddressSpace": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Prod Address Space",
+          "description": "Address space for the prod vnet"
+        },
+        "defaultValue": "10.172.169.0/24"
+      },
+      "bpdevAddressSpace": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Dev Address Space",
+          "description": "Address space for the dev vnet"
+        },
+        "defaultValue": "10.172.170.0/24"
+      }
+    },
+    "resourceGroups": {
+      "rg-core-network": {
+        "metadata": {
+          "displayName": "rg-core-network"
+        },
+        "dependsOn": []
+      }
+    }
+  }
+}

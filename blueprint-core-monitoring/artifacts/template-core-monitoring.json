@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "prefix": {
+            "type": "string",
+            "metadata": {
+                "displayName": "Prefix for all resources",
+                "description": "Prefix for all resources."
+            }
+        },
+        "workspaceName": {
+            "type": "string",
+            "metadata": {
+                "displayName": "Log Anayltics Workspace Suffix",
+                "description": "Value that will be appended to the prefix to generate the Log Analytics Workspace Name"
+            },
+            "defaultValue": "logs-core"
+        },
+        "workspaceSku": {
+            "type": "string",
+            "allowedValues": [
+                "pergb2018",
+                "Free",
+                "Standalone",
+                "PerNode",
+                "Standard",
+                "Premium"
+            ],
+            "defaultValue": "pergb2018",
+            "metadata": {
+                "displayname": "Log Anayltics Workspace SKU",
+                "description": "Pricing tier: PerGB2018 or legacy tiers (Free, Standalone, PerNode, Standard or Premium) which are not available to all customers."
+            }
+        },
+        "netwatchName": {
+            "type": "string",
+            "metadata": {
+                "displayname": "Network Watcher Suffix",
+                "description": "Value that will be appended to the prefix to generate the Network Watcher Name"
+            },
+            "defaultValue": "netwatch"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        }
+    },
+    "variables": {
+        "workspaceName": "[concat(parameters('prefix'), '-', parameters('workspaceName'), '-', uniqueString(resourceGroup().id))]",
+        "netwatchName": "[concat(parameters('prefix'), '-', parameters('netwatchName'))]"
+    },
+    "resources": [
+        {
+            "name": "[variables('workspaceName')]",
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "apiVersion": "2020-03-01-preview",
+            "location": "[parameters('location')]",
+            "properties": {
+                "sku": {
+                    "name": "[parameters('workspaceSku')]"
+                }
+            }
+        },
+        {
+            "name": "[variables('netwatchName')]",
+            "type": "Microsoft.Network/networkWatchers",
+            "apiVersion": "2020-04-01",
+            "location": "[parameters('location')]",
+            "properties": {
+            }
+        }
+    ]
+}
